@@ -1,0 +1,6 @@
+static
+.idea
+manager/local_settings.py
+manager/private_settings.py
+*.pyc
+*.db

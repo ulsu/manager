@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Sign in</title>
+    </head>
+
+    <body>
+        <form action='/accounts/login/next={{ next }}' method='POST'>
+            {{ form.as_p }}
+            <p><input type='submit' value='Sign in' /></p>
+        </form>
+    </body>
+</html>
