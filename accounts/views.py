@@ -5,8 +5,6 @@ from django.shortcuts import render
 from django.forms.util import ErrorList
 
 def login(request):
-    go_next = request.GET['next'] if 'next' in request.GET else '/'
-
     if request.method == 'POST':
         form = LoginForm(request.POST)
 
@@ -15,14 +13,13 @@ def login(request):
 
             if user is not None and user.is_active:
                 auth.login(request, user)
-                return HttpResponseRedirect(go_next)
+                return HttpResponseRedirect('/')
             else:
                 errors = form._errors.setdefault('username', ErrorList())
                 errors.append(u'Username or password incorrect')
 
             return render(request, 'accounts/login.html', {
                     'form': form,
-                    'next': go_next,
                 })
     else:
         if request.user.is_authenticated():
@@ -32,7 +29,6 @@ def login(request):
 
     return render(request, 'accounts/login.html', {
             'form': form,
-            'next': go_next,
         })
 
 def logout(request):

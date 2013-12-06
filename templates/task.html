@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}{% for t in task %}{{ t.title }}{% endfor %}{% endblock %}
+
+{% block content %}
+    {% if task %}
+        {% include 'task_detail.html' %}
+    {% else %}
+        Task not found
+    {% endif %}
+{% endblock %}

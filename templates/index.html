@@ -1,5 +1,33 @@
-{% extends base.html %}
+{% extends 'base.html' %}
+
+{% block title %}Tasks{% endblock %}
 
 {% block content %}
-abvgd
+    {% if tasks %}
+        {% for t in tasks %}
+            {% for p in t.performers.all %}
+                {% if p.username == user.username %}
+                    <a href='/task/{{ t.id }}'>
+                        <div class='row_{% if t.importance == 0 %}low{% elif t.importance == 1 %}mid{% elif t.importance == 2 %}high{% endif %}'>
+                            <div>
+                                {{ t.title }}
+                            </div>
+
+                            <div>
+                                {{ t.description }}
+                            </div>
+
+                            <div class='text-right'>
+                                 {% for p in t.performers.all %}
+                                    {{ p.username }},
+                                {% endfor %} до {{ t.pub_date }}
+                            </div>
+                        </div>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% else %}
+        No tasks
+    {% endif %}
 {% endblock %}

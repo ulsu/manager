@@ -1,16 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang='ru'>
     <head>
         <title>{% block title %}{% endblock %}</title>
-        <script src='{{ STATIC_URL }}/js/jquery-1.10.2.min.js'></script>
-        <script src='{{ STATIC_URL }}/js/bootstrap.min.js'></script>
-        {% block js %}{% endblock %}
+        <link rel='stylesheet' href='{{ STATIC_URL }}bootstrap/css/bootstrap.min.css' />
 
-        <link rel='stylesheet' href='{{ STATIC_URL }}/bootstrap.css'>
+        <style type='text/css'>
+            a:hover {
+                text-decoration: none;
+            }
+            .row_low {
+                margin: 10px;
+                padding: 30px;
+                background: #d6e9c6;
+            }
+
+            .row_mid {
+                margin: 10px;
+                padding: 30px;
+                background: #ffffcc;
+            }
+
+            .row_high {
+                margin: 10px;
+                padding: 30px;
+                background: #f2dede;
+            }
+        </style>
+
         {% block css %}{% endblock %}
     </head>
 
     <body>
-        {% block content %}{% endblock %}
+        <div class='container'>
+            {% block content %}{% endblock %}
+        </div>
+
+        <script type='text/javascript' src='{{ STATIC_URL }}js/jquery-1.10.2.min.js'></script>
+        <script type='text/javascript' src='{{ STATIC_URL }}bootstrap/js/bootstrap.min.js'></script>
     </body>
 </html>

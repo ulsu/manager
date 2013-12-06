@@ -1,0 +1,32 @@
+         {% for t in task %}
+             <div class='row_{% if t.importance == 0 %}low{% elif t.importance == 1 %}mid{% elif t.importance == 2 %}high{% endif %}'>
+
+                {% if user in t.performers.all %}
+                    {% if not t.parent %}
+                        <h1>{{ t.title }}</h1>
+                    {% else %}
+                        <div class='row'>
+                            {{ t.title }}
+                        </div>
+                    {% endif %}
+
+                    <div class='row'>
+                        {{ t.description }}
+                    </div>
+
+                    <div class='text-right'>
+                        {% for p in t.performers.all %}
+                            {{ p.username }},
+                        {% endfor %} до {{ t.pub_date }}
+                    </div>
+
+                    {% with 'task_detail.html' as template_name %}
+                        {% with t.children.all as task %}
+                            {% include template_name %}
+                        {% endwith %}
+                    {% endwith %}
+                {% else %}
+                    no access
+                {% endif %}
+             </div>
+        {% endfor %}
